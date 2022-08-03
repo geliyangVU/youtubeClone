@@ -1,19 +1,27 @@
 import express from "express";
+import { connectToDatabase, disconnectFromDatabase } from "./utils/database";
+import logger from "./utils/logger";
 
 const PORT = process.env.PORT || 4000;
 
 const app = express()
 
-const server = app.listen(PORT, () =>{
-    console.log(`Server Listening to: http://Localhost: ${PORT}`);
+const server = app.listen(PORT,  async () =>{
+    await connectToDatabase();
+    logger.info(`Server Listening to: http://Localhost: ${PORT}`);
 })
 
 const signals = ["SIGTERM", "SIGINT"];
 
 function gracefulShutdown(signal :string){
-    process.on(signal , async()=>{
+    process.on(signal, async () => {
+        logger.info("Signal received:", signal)
         server.close();
-        console.log("work is done")
+
+
+        //disconnect mongoDB
+        await disconnectFromDatabase();
+        logger.info("work is done")
         process.exit(0);
     })
 }
