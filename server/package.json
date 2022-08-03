@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Geli Yang",
   "license": "MIT",
+  "scripts":{
+    "dev":"tsnd --exit-child --transpile-only src/main.ts"
+  },
   "dependencies": {
     "@mantine/form": "^4.2.12",
     "@typegoose/typegoose": "^9.10.1",
