@@ -21,3 +21,5 @@ export const registerUserSchema = {
     path: ["confirmPassword"],
   }),
 };
+
+export type registerUserBody = TypeOf<typeof registerUserSchema.body>;
