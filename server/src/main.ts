@@ -6,7 +6,7 @@ import logger from "./utils/logger";
 import { CORS_ORIGIN } from "./constants";
 import helmet from "helmet";
 import userRoute from "./modules/user/user.route";
-
+import authRoute from "./modules/auth/auth.route";
 const PORT = process.env.PORT || 4000;
 
 const app = express();
@@ -25,6 +25,7 @@ app.use(helmet());
 
 //start of routes
 app.use("/api/users", userRoute);
+app.use("/api/auth", authRoute);
 
 const server = app.listen(PORT, async () => {
   await connectToDatabase();
